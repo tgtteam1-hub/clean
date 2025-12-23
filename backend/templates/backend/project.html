@@ -1,0 +1,80 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <section class="section min-vh-100 d-flex flex-column ">
+    <h2>उपक्रमाविषयी माहिती</h2>
+
+    <p>आपल्या मौल्यवान वन्यजीवांचे संरक्षण करण्यासाठी <a href='https://www.thegrasslandstrust.org/' target='_blank' style="color:#12995d;">द ग्रासलँड्स ट्रस्ट</a> या संस्थेने, <a href='https://ashrayahasthatrust.org/' target='_blank' style="color:#12995d;">आश्रय हस्थ ट्रस्ट</a> यांच्या सहकार्याने सुरू केलेल्या वन्यजीव निरीक्षक/संरक्षक? कार्यक्रमात सहभागी व्हा.</p>
+    <p>
+    <h4>वन्यजीव निरीक्षक कार्यक्रम काय आहे?</h4>
+
+    <div class="container mb-4">
+      <div class="row">
+        <div class="col-sm-12 pt-2 pb-2">
+          <img src="{% static 'backend/platform/discussion_01.jpg' %}" alt="" class="img-fluid rounded">
+        </div>
+        <div class="col-sm-12 pt-2 pb-2">
+          <img src="{% static 'backend/platform/discussion_03.jpg' %}" alt="" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+
+    <p>हा कार्यक्रम स्थानिक रहिवाशांना वन्यजीवांचे निरीक्षण करण्यासाठी व संभाव्य धोक्यांचा अंदाज घेण्यासाठी प्रशिक्षण देतो, ज्यामुळे संवर्धनाच्या प्रयत्नांना मोठी मदत होते. वन्यजीव निरीक्षक म्हणून तुम्ही वन्यजीव हालचालींची माहिती गोळा करून आपल्या गावातील लोकांबरोबर याबाबत संवाद साधाल.</p>
+<p>
+<h4>तुमची भूमिका:</h4>
+<ul>
+    <li><strong>प्रशिक्षण:</strong> वन्यजीवांचे दर्शन आणि चिन्हे ओळखणे शिकून घ्या.</li>
+    <li><strong>वन्यजीव निरीक्षण:</strong> स्थानिक वन्यजीवांच्या दैनंदिन हालचालींचे निरीक्षण करा.</li>
+    <li><strong>सहभाग व जनजागृती:</strong> गावकऱ्यांशी संवाद साधून जनजागृती करा आणि आपल्या निरीक्षणांची माहिती त्यांना सांगा.</li>
+    <li><strong>रेस्क्यूमध्ये सहाय्य:</strong> मदत येई पर्यंत पशुप्राण्यांच्या रेस्क्यूमध्ये प्राथमिक निरीक्षणे करून मदत करा.</li>
+</ul>
+</p>
+<p><strong>सहभागी व्हा!</strong> आपल्या नैसर्गिक वारश्याचे संरक्षण करण्यासाठी महत्त्वाची भूमिका घ्या. एकत्र येऊन, आपण मोठा बदल घडवू शकतो!
+</p>
+<hr>
+<div class="container mt-4 mb-4">
+  <div class="row ">
+    <div class="col-sm text-center">
+      <img src="{% static 'backend/platform/aht_logo.png' %}" alt="" class="img-fluid rounded">
+      <div class="mt-2 mb-5">Ashraya Hastha Trust</div>
+    </div>
+    <div class="col-sm text-center">
+      <img src="{% static 'backend/platform/tgt_logo_circular.png' %}" alt="" class="img-fluid rounded">
+      <div class="mt-2 mb-5">The Grasslands Trust</div>
+    </div>
+    <div class="col-sm text-center pb-2">
+      <img src="{% static 'backend/platform/maharashtra_forest_dept_logo_square.jpeg' %}" alt="" class="img-fluid rounded">
+      <div class="mt-2 mb-2">Forest Dept - Govt of Maharashtra.</div>
+    </div>
+  </div>
+  <hr>
+  <div>
+    <h2>संवर्धन माहिती पुस्तक</h2>
+    <div class="text-left">
+      <a class="btn btn-primary " href="{% url 'backend_conservation_booklet' %}">पुस्तक</a>
+    </div>
+  </div>
+</div>
+<hr>
+<h2>About Project</h2>
+
+<p>Join us in protecting our precious wildlife through the Wildlife Watchers Program, launched by <a href='https://www.thegrasslandstrust.org/' target='_blank' style="color:#12995d;">The Grasslands Trust (TGT)</a>, supported by <a href='https://ashrayahasthatrust.org/' target='_blank' style="color:#12995d;">the <a href='https://ashrayahasthatrust.org/' target='_blank' style="color:#12995d;">Ashraya Hastha Trust.</a></p>
+<p><h4>What is the Wildlife Watchers Program?</h4></p>
+<p>The program trains local residents to monitor wildlife and identify potential threats, playing a vital role in conservation efforts. As Wildlife Watchers, you will be on the front lines, gathering valuable information about animal movements and engaging with your community.</p>
+
+<p><h4>Your Role:</h4></p>
+<ul>
+    <li>Monitor Wildlife: Track daily activities and movements of local wildlife.</li>
+    <li>Engage & Educate: Connect with residents to raise awareness and share findings.</li>
+    <li>Field Training: Learn to identify wildlife through sightings and signs.</li>
+    <li>Assist in Rescues: Provide initial observations during animal rescues until professionals arrive.</li>
+</ul>
+<h4>Get Involved!</h4>
+<p>Be a key player in safeguarding our natural heritage. Together, we can make a difference!</p>
+<hr>
+    <a class="btn btn-primary" href="{% url 'backend_home' %}">Go to home</a>
+    <!-- <img src="{% static 'ui_theme/assets/img/not-found.svg' %}" class="img-fluid py-5" alt="Page Not Found"> -->
+  </section>
+</div>
+{% endblock content %}

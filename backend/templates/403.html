@@ -1,0 +1,12 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <section class="section error-404 min-vh-100 d-flex flex-column align-items-center ">
+    <h2>Access Not Allowed</h2>
+    <!-- <h2>Access Not Allowed</h2> -->
+    <a class="btn" href="{% url 'backend_home' %}">Back to home</a>
+    <!-- <img src="{% static 'ui_theme/assets/img/not-found.svg' %}" class="img-fluid py-5" alt="Page Not Found"> -->
+  </section>
+</div>
+{% endblock content %}
