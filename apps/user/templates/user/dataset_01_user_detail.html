@@ -1,0 +1,150 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block content %}
+<div class="pagetitle">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'backend_home' %}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'user_home' %}">User</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<div>
+    <h3><a href="{% url 'user_detail' person.id %}">User Details</a></h3>
+    <hr>
+    <div class='text-end'>
+        <a href="{% url 'user_update' person.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        {% if user.get_role_display == 'Coordinator' %}
+            <a href="{% url 'user_update_password' person.id %}"><button type="button" class="btn btn-outline-secondary">Change Password</button></a>
+        {% endif %}
+        <a href="{% url 'user_delete' person.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+    </div>
+</div>
+<main class="main mt-3">
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              <!-- <img src="{% static 'ui_theme/assets/img/tgt_logo_0.png' %}" alt="Profile" class="rounded-circle"> -->
+              <img src="{{person.profile_picture.url}}"  alt="Profile" class="rounded-circle">
+
+              <h2>{{ person.username }}</h2>
+              <h3>{{ person.get_role_display }}</h3>
+              <!-- <div class="social-links mt-2">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div> -->
+            </div>
+            <div class="p-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30329.468808547757!2d74.20687435!3d18.15545425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc3aaa9e41ab485%3A0x2f74a4d99e6035f5!2sGulunche%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1729677342558!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <!-- <h5 class="card-title">About</h5>
+                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p> -->
+
+                  <h5 class="card-title">Profile Details</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-9 col-md-8">{{ person.name }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                    <div class="col-lg-9 col-md-8">{{ person.get_gender_display }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Age</div>
+                    <div class="col-lg-9 col-md-8">{{ person.age }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Occupation</div>
+                    <div class="col-lg-9 col-md-8">{{ person.get_occupation_display }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Village</div>
+                    <div class="col-lg-9 col-md-8">{{ person.village }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Taluka</div>
+                    <div class="col-lg-9 col-md-8">{{ person.taluka }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">District</div>
+                    <div class="col-lg-9 col-md-8">{{ person.district }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">State</div>
+                    <div class="col-lg-9 col-md-8">{{ person.state }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Pin Code</div>
+                    <div class="col-lg-9 col-md-8">{{ person.pin_code }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Mobile Number 1</div>
+                    <div class="col-lg-9 col-md-8">{{ person.mobile_number_1 }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Mobile Number 2</div>
+                    <div class="col-lg-9 col-md-8">{{ person.mobile_number_2 }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Username</div>
+                    <div class="col-lg-9 col-md-8">{{ person.username }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Active Status</div>
+                    <div class="col-lg-9 col-md-8">{{ person.is_active }}</div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-settings">
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="pagetitle">
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'backend_home' %}">Home</a></li>
+      <li class="breadcrumb-item active"><a href="{% url 'incident_home' %}">Incident</a></li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<main>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title" style="font-size:25px"><a href="{% url 'user_create' %}">नवीन घटना</a></h4>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <!-- <input type="file" name = "files" multiple /> -->
+              <button class="btn btn-primary w-100" type="submit">नोंद करा</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main><!-- End #main -->
+
+
+<!-- Automatically capture geolocation of the user -->
+<script>
+
+/* squeeze existing filed into col-8 */
+geolocation_field_html = "<div class='row'><div class='col-8'>"
+  + document.getElementById('div_id_geolocation').innerHTML
+  + "</div><div class='col-4 align-self-end' id='geolocation_capture'></div></div>" ;
+document.getElementById('div_id_geolocation').innerHTML = geolocation_field_html;
+
+/* add capture button into col-4 */
+document.getElementById('geolocation_capture').innerHTML = '<button type="button" class="btn btn-success" onclick="getLocation()">Capture</button>';
+
+/* Fetch and populate geolocation data */
+const noter_geolocation = document.getElementById("id_geolocation");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    console.log('Geolocation unavailable.');
+    noter_geolocation.value = "Geolocation unavailable.";
+  }
+}
+
+function success(position) {
+  noter_geolocation.value = position.coords.latitude
+    + ", "
+    + position.coords.longitude;
+}
+
+function error() {
+  console.log('Not Available');
+  noter_geolocation.value = "Not Available";
+}
+
+</script>
+<!-- Geolocation capture script ends -->
+
+{% endblock content %}

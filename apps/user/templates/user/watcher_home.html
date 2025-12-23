@@ -1,0 +1,48 @@
+{% extends 'backend/base.html' %}
+{% block content %}
+<h2>वाइल्डलाइफ वॉचर - डॅशबोर्ड </h2>
+<hr>
+<div class="alert alert-warning mt-2" role="alert">
+  <h5>
+    तात्काळ मदतीसाठी संपर्क
+    <span class="d-none d-sm-inline">-</span>
+    <br class="d-block d-sm-none">
+    नचिकेत अवधानी - <a href="tel:9765458587">
+      <button type="button" class="btn btn-outline-success">
+      <i class="bi bi-telephone-outbound-fill">  ९७६५४५८५८७</i>
+    </button>
+    </a>
+    <div class="d-sm-none"><br></div>
+    <!-- <span style="font-size:12px"> -->
+      <b>Emergency contact</b>
+      <span class="d-none d-sm-inline">-</span>
+      <br class="d-block d-sm-none">
+      <b>Nachiket Awadhani</b> - <a href="tel:9765458587">
+      <button type="button" class="btn btn-outline-success">
+        <i class="bi bi-telephone-outbound-fill">  9765458587</i>
+      </button>
+      </a>
+    <!-- </span> -->
+  </h5>
+</div>
+<hr>
+
+<div class="row">
+  <div class="col-6">
+    <div class="p-2">
+      <a href="{% url 'incident_home' %}">
+      <button type="button" class="btn btn-success">
+          <strong>माझ्या एकूण<span class="d-sm-none"><br></span> नोंदी - {{ watcher_note_count }}</strong>
+      </button>
+      </a>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class='text-end pt-2'>
+      <a href="{% url 'incident_create' %}">
+        <button type="button" class="btn btn-primary">Add Incident <span class="d-sm-none"><br></span> <span class="d-none d-sm-inline">-</span> नवीन नोंद
+      </button>
+      </a>
+  </div>
+</div>
+{% endblock content %}

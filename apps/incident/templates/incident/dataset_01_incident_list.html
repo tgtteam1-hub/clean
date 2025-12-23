@@ -1,0 +1,82 @@
+{% extends 'backend/base.html' %}
+{% load django_tables2 %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pagetitle">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'backend_home' %}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'incident_home' %}">Incident</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<h3><a href="{% url 'incident_home' %}">Incident List</a></h3>
+<hr>
+<div class='text-end'>
+    <a href="{% url 'incident_create' %}"><button type="button" class="btn btn-primary">नवी नोंद करा</button></a>
+</div>
+<p class='mt-0 mb-2'>{{ table.rows|length }} Incidents</p>
+<form action="" method="get" class="">
+    <div class='text-end'>
+        <span class="d-lg-none">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control w-50 mr-2" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1"
+                id = 'activity_search'
+                name = 'activity_search'
+                value="{{ request.GET.activity_search }}">
+                <span class="ml-2 p-1">
+                    <button class="btn btn-sm btn-success ml-2" type="submit">
+                        <i class="bx bx-search-alt-2"></i>
+                    </button>
+                    <a href="{% url 'incident_home' %}">
+                        <button type="button" class="btn btn-sm btn-secondary">Clear</button>
+                    </a>
+                </span>
+            </div>
+        </span>
+        <span class="mb-4">
+            <button class="btn btn-sm btn-success d-none d-lg-inline" type="submit">
+                <i class="bx bx-search-alt-2"></i> शोधा
+            </button>
+            <a href="{% url 'incident_home' %}">
+                <button type="button" class="btn btn-sm btn-secondary d-none d-lg-inline">Clear</button>
+            </a>
+        </span>
+    </div>
+
+    <div class="mt-2">{% render_table table %}</div>
+
+    {% if user.get_role_display == 'Coordinator' %}
+        <div class="text-end">
+            <a href="{% export_url 'xlsx' %}"> Download as XLSX</a>
+        </div>
+    {% endif %}
+
+</form>
+
+
+{% if filter %}
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            var row = `
+                <tr class='d-none d-lg-table-row'>
+                <td>{{ filter.form.id }}</td>
+                <td>{{ filter.form.information_type }}</td>
+                <td>{{ filter.form.type }}</td>
+                <td>{{ filter.form.date }}</td>
+                <td>{{ filter.form.timeslot }}</td>
+                <td>{{ filter.form.animal }}</td>
+              <td>{{ filter.form.animal_count }}</td>
+                <td>{{ filter.form.location }}</td>
+                <td>{{ filter.form.village }}</td>
+                <td>{{ filter.form.taluka }}</td>
+                <td>{{ filter.form.noter__name }}</td>
+                 <td>{{ filter.form.approval }}</td>
+                <tr>
+                `;
+            $(row).prependTo("#activity_table_01 > tbody");
+        });
+    </script>
+{% endif %}
+
+{% endblock content %}

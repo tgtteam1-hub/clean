@@ -1,0 +1,133 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Watcher - Login</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'ui_theme/assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'ui_theme/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'ui_theme/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'ui_theme/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'ui_theme/assets/css/style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <main>
+    <div class="container">
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-6 d-flex flex-column align-items-center justify-content-center p-2">
+                <img src="{% static 'backend/platform/two_wolves_03.jpg' %}" alt="" class="img-fluid rounded">
+            </div>
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+             <!--  <div class="d-flex justify-content-center py-4">
+                <a href="{% url 'backend_home' %}" class="logo d-none d-flex align-items-center w-auto mt-4">
+                  <img src="{% static 'ui_theme/assets/img/tgt_logo_0.png' %}" alt="" style='max-height:150px;'>
+                </a>
+              </div> --><!-- End Logo -->
+              <h1 class="text-center pb-0 mt-4 mb-3" style="color:#5b482f; font-size:40px;"><strong>Wildlife Watcher</strong></h1>
+
+              <div class="card mb-3">
+                <div class="card-body" id='login_box' style="display:none">
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">तुमच्या खात्यामध्ये लॉगिन करा</h5>
+                    <p class="text-center small">युजरनेम आणि पासवर्ड खाली भरा</p>
+                  </div>
+                  <form class="row g-3 needs-validation" novalidate method="POST">
+                     {% csrf_token %}
+                     {{ form|crispy }}
+                    <div class="col-12">
+                      <button class="btn btn-primary w-100" type="submit">लॉगिन करा</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="card-body" id='disclaimer'>
+                  <br>
+                  <br>
+                  मी या अँपचा वापर स्थानिक नोंद ठेवण्यासाठी व संशोधनात मदत करण्यासाठी करत आहे. माझ्या हातून कळत नकळत कोणतेही गैर प्रकार किंवा वन्यजीव कायद्याचे उल्लंघन झाल्यास द ग्रासलँड ट्रस्ट जबाबदार राहणार नाही.
+                  <br>
+                  <br>
+                  <button
+                    class="btn btn-primary w-100" type="submit"
+                    id="disclaimer_consent"
+                    onclick="show_login_box()"
+                    >सहमती आहे. लॉगिन करा.</button>
+                </div>
+              </div>
+
+              <h1 class="text-center pb-0 mt-2 mb-3" style="color:#5b482f; font-size:40px;">  <strong>वाईल्डलाईफ वॉचर</strong>
+              </h1>
+              <button type="button" class="btn btn-success text-center pb-0 mt-4">
+                    <h4 class="pt-2 pb-0"><a href="{% url 'backend_project' %}" style="color:#fff;">उपक्रमाविषयी माहिती वाचा
+                    </a></h4>
+                </button>
+              <!-- <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+ -->
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    function show_login_box(){
+      document.getElementById("disclaimer").style.display = "none";
+      document.getElementById("login_box").style.display = "block";
+    }
+  </script>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'ui_theme/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/chart.js/chart.umd.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/quill/quill.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'ui_theme/assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'ui_theme/assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

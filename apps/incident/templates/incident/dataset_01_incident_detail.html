@@ -1,0 +1,216 @@
+{% extends 'backend/base.html' %}
+{% load static %}
+{% block content %}
+<div class="pagetitle">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'backend_home' %}">Home</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'incident_home' %}">Incident</a></li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<div>
+    <h3><a href="{% url 'incident_detail' activity.id %}">Incident Details</a></h3>
+    <hr>
+    <div class='text-end'>
+        <a href="{% url 'incident_update' activity.id %}"><button type="button" class="btn btn-primary">Update</button></a>
+        <a href="{% url 'incident_delete' activity.id %}"><button type="button" class="btn btn-warning">Delete</button></a>
+    </div>
+</div>
+<main class="main mt-3">
+    <section class="section profile">
+      <div class="row">
+        <!-- <div class="col-xl-4">
+        </div>
+         -->
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-body pt-3">
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <!-- <h5 class="card-title">About</h5>
+                  <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p> -->
+
+                  <h5 class="card-title">Incident Details</h5>
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">ID</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.id }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">रिपोर्टींग</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.get_information_type_display }}</div>
+                  </div>
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">घटनेचा प्रकार</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.get_type_display }}</div>
+                  </div>
+                 <!--  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">शीर्षक</div>
+                    <div class="col-lg-9 col-md-8"><strong>{{ activity.title }}</strong></div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">दिनांक</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.date }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">वेळ </div>
+                    <div class="col-lg-9 col-md-8">{{ activity.get_timeslot_display }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">प्राणी</div>
+                    <div class="col-lg-9 col-md-8">
+                        {% for a in activity.animal %}
+                        {{ a }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">प्राणी संख्या</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.animal_count }}</div>
+                  </div>
+                   <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">नकाशा ठिकाण</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.geolocation }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">ठिकाण</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.location }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">गाव</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.village }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">तालुका</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.taluka }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">वर्णन/अधिक माहिती</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.description }}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">नोंद मान्यता</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.get_approval_display }}</div>
+                  </div>
+                  {% if 'Rejected' == activity.get_approval_display %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Reject Reason</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.reject_reason }}</div>
+                  </div>
+                  {% endif %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">नोंद करणारी व्यक्ती</div>
+                    <div class="col-lg-9 col-md-8"><a href="{% url 'user_detail' activity.noter.id %}">{{ activity.noter.name }}</a></div>
+                  </div>
+                  {% if 3 == user.role %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">कोऑर्डिनेटरची टिप्पणी</div>
+                    <div class="col-lg-9 col-md-8">{{ activity.coordinator_note }}</div>
+                  </div>
+                  {% endif %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">फोटो</div>
+                    <section class="section profile pt-4">
+                          <div class="row">
+                            {% if '/media/incident_pics/default_animal_2.png' !=  activity.picture_1.url %}
+                            <div class="col-lg-6 p-2">
+                               <img src="{{ activity.picture_1.url}}"  alt="picture_1" class="rounded" style="max-width:200px;" data-bs-toggle="modal" data-bs-target="#modal_picture_1">
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal_picture_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <img src="{{ activity.picture_1.url}}"  alt="picture_1" class="rounded" style="max-width:100%;">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- Modal 1 ends -->
+                            </div>
+                            {% endif %}
+
+                            {% if '/media/incident_pics/default_animal_2.png' !=  activity.picture_2.url %}
+                            <div class="col-lg-6 p-2">
+                               <img src="{{ activity.picture_2.url}}"  alt="picture_2" class="rounded" style="max-width:200px;" data-bs-toggle="modal" data-bs-target="#modal_picture_2">
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal_picture_2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <img src="{{ activity.picture_2.url}}"  alt="picture_2" class="rounded" style="max-width:100%;">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- Modal 2 ends -->
+                            </div>
+                            {% endif %}
+
+                            {% if '/media/incident_pics/default_animal_2.png' !=  activity.picture_3.url %}
+                            <div class="col-lg-6 p-2">
+                               <img src="{{ activity.picture_3.url}}"  alt="picture_3" class="rounded" style="max-width:200px;" data-bs-toggle="modal" data-bs-target="#modal_picture_3">
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal_picture_3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <img src="{{ activity.picture_3.url}}"  alt="picture_3" class="rounded" style="max-width:100%;">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- Modal 3 ends -->
+                            </div>
+                            {% endif %}
+
+                            {% if '/media/incident_pics/default_animal_2.png' !=  activity.picture_4.url %}
+                            <div class="col-lg-6 p-2">
+                               <img src="{{ activity.picture_4.url}}"  alt="picture_4" class="rounded" style="max-width:200px;" data-bs-toggle="modal" data-bs-target="#modal_picture_4">
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal_picture_4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <img src="{{ activity.picture_4.url}}"  alt="picture_4" class="rounded" style="max-width:100%;">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- Modal 4 ends -->
+                            </div>
+                            {% endif %}
+                        </div>
+                    </section>
+                  </div>
+                </div>
+                <hr>
+                <a href="{% url 'backend_home' %}">
+                  <button type="button" class="btn btn-primary">
+                    डॅशबोर्डला जा.
+                  </button>
+                </a>
+              </div><!-- End Bordered Tabs -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+{% endblock content %}
