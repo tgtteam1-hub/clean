@@ -46,14 +46,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
+
+    'django.contrib.postgres',   # THIS LINE IS REQUIRED
+
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
     'django_tables2',
     'django_filters',
+
     'apps.user',
-    'apps.incident'
+    'apps.incident',
 ]
 
 MIDDLEWARE = [
